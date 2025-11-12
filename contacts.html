@@ -68,6 +68,152 @@
         opacity: 1;
     }
 }
+   /* ============================================
+   ВЫПАДАЮЩИЕ ПОДМЕНЮ - НАЧАЛО
+   ============================================ */
+
+/* Добавляем класс для пунктов меню с подменю */
+.nav-menu > li.has-submenu {
+    position: relative;
+}
+
+/* Убираем стрелочки - оставляем только hover-эффект */
+.nav-menu > li.has-submenu > a:hover {
+    background-color: var(--color-primary-hover);
+}
+
+/* Стили выпадающего подменю */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 320px;
+    max-width: 400px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 0 0 8px 8px;
+    list-style: none;
+    padding: 0.75rem 0;
+    margin: 0;
+    
+    /* Скрываем по умолчанию */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    transition-delay: 0s;
+    
+    /* Граница сверху */
+    border-top: 3px solid var(--color-danger);
+    z-index: 1000;
+}
+
+/* Показываем при наведении с задержкой 350ms */
+.nav-menu > li.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0.35s;
+}
+
+/* Стили пунктов подменю */
+.submenu li {
+    margin: 0;
+}
+
+.submenu a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    padding: 0.65rem 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.submenu a:hover {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    padding-left: 2rem;
+}
+
+/* Иконка стрелки появляется при hover */
+.submenu a::before {
+    content: '→';
+    margin-right: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: var(--color-danger);
+    font-weight: bold;
+}
+
+.submenu a:hover::before {
+    opacity: 1;
+}
+
+/* Разделитель в подменю (если нужен) */
+.submenu-divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: 0.5rem 1rem;
+}
+
+/* Заголовок группы в подменю (если нужен) */
+.submenu-header {
+    padding: 0.5rem 1.5rem 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* На мобильных - клик вместо hover */
+    .submenu {
+        position: static;
+        box-shadow: none;
+        background-color: var(--color-primary-hover);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition: max-height 0.4s ease;
+        border-top: none;
+        border-left: 3px solid var(--color-danger);
+    }
+
+    .nav-menu > li.has-submenu.open .submenu {
+        max-height: 800px;
+    }
+
+    .submenu a {
+        color: white;
+        padding-left: 2.5rem;
+        font-size: 0.9rem;
+    }
+
+    .submenu a:hover {
+        background-color: var(--color-primary-active);
+        color: white;
+        padding-left: 3rem;
+    }
+
+    .submenu a::before {
+        color: white;
+    }
+
+    .submenu-header {
+        color: rgba(255, 255, 255, 0.7);
+        padding-left: 2.5rem;
+    }
+} 
 </style>
 
 <script>
@@ -98,16 +244,89 @@ document.addEventListener('keydown', function(event) {
         </div>
         <nav>
             <div class="nav-container">
-                                                                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="about.html">О себе</a></li>
-                    <li><a href="portfolio.html">Портфолио</a></li>
-                    <li><a href="metodika.html">Методика</a></li>
-                    <li><a href="ai-projects.html">ИИ в образовании</a></li>
-                    <li><a href="vneurochnaya.html">Активности</a></li>
-                    <li><a href="parents.html">Родителям</a></li>
-                    <li><a href="contacts.html" class="active">Контакты</a></li>
-                </ul>
+                 <ul class="nav-menu" id="navMenu">
+    <!-- 1. ГЛАВНАЯ (с подменю) -->
+    <li class="has-submenu">
+        <a href="index.html" class="active" onclick="return handleSubmenuClick(event, this)">Главная</a>
+        <ul class="submenu">
+            <li><a href="index.html#o-predmete-obzr">О предмете ОБЗР</a></li>
+            <li><a href="index.html#novosti">Последние новости</a></li>
+        </ul>
+    </li>
+
+    <!-- 2. О СЕБЕ (с подменю) -->
+    <li class="has-submenu">
+        <a href="about.html" onclick="return handleSubmenuClick(event, this)">О себе</a>
+        <ul class="submenu">
+            <li><a href="about.html#obrazovanie">Образование</a></li>
+            <li><a href="about.html#perepodgotovka">Переподготовка и повышение квалификации</a></li>
+            <li><a href="about.html#nagrady">Награды и достижения</a></li>
+        </ul>
+    </li>
+
+    <!-- 3. ПОРТФОЛИО (с подменю) -->
+    <li class="has-submenu">
+        <a href="portfolio.html" onclick="return handleSubmenuClick(event, this)">Портфолио</a>
+        <ul class="submenu">
+            <li><a href="portfolio.html#rezultaty-obucheniya">Результаты освоения ОБЗР обучающимися</a></li>
+            <li><a href="portfolio.html#dostizheniya-uchenikov">Достижения учащихся</a></li>
+            <li><a href="portfolio.html#metodicheskaya-aktivnost">Методическая активность</a></li>
+            <li><a href="portfolio.html#dokumenty">Документы портфолио</a></li>
+        </ul>
+    </li>
+
+    <!-- 4. МЕТОДИКА (с подменю) -->
+    <li class="has-submenu">
+        <a href="metodika.html" onclick="return handleSubmenuClick(event, this)">Методика</a>
+        <ul class="submenu">
+            <li><a href="metodika.html#normativnaya-dokumentaciya">Нормативная документация</a></li>
+            <li><a href="metodika.html#konspekty-urokov">Конспекты уроков по модулям</a></li>
+            <li><a href="metodika.html#prezentacii-testy">Презентации, наглядные материалы, тесты и контрольные</a></li>
+            <li><a href="metodika.html#metodicheskie-rekomendacii">Методические рекомендации для коллег</a></li>
+        </ul>
+    </li>
+
+    <!-- 5. ИИ В ОБРАЗОВАНИИ (с подменю) -->
+    <li class="has-submenu">
+        <a href="ai-projects.html" onclick="return handleSubmenuClick(event, this)">ИИ в образовании</a>
+        <ul class="submenu">
+            <li><a href="ai-projects.html#dlya-uchenikov">Для учеников - Творческие проекты</a></li>
+            <li><a href="ai-projects.html#dlya-roditelej">Для родителей - практические материалы</a></li>
+            <li><a href="ai-projects.html#dlya-kolleg">Для коллег - методические материалы</a></li>
+            <li><a href="ai-projects.html#poleznye-resursy">Полезные ресурсы по ИИ в образовании</a></li>
+        </ul>
+    </li>
+
+    <!-- 6. АКТИВНОСТИ (с подменю) -->
+    <li class="has-submenu">
+        <a href="vneurochnaya.html" onclick="return handleSubmenuClick(event, this)">Активности</a>
+        <ul class="submenu">
+            <li><a href="vneurochnaya.html#yunarmiya">Юнармия</a></li>
+            <li><a href="vneurochnaya.html#yuid">ЮИД (Юные инспекторы движения)</a></li>
+            <li><a href="vneurochnaya.html#zarnica">Зарница 2.0</a></li>
+            <li><a href="vneurochnaya.html#olimpiady">Олимпиады по ОБЗР</a></li>
+            <li><a href="vneurochnaya.html#uchebno-polevye-sbory">Учебно-полевые сборы</a></li>
+            <li><a href="vneurochnaya.html#vzaimodejstvie">Взаимодействие с партнёрами</a></li>
+        </ul>
+    </li>
+
+    <!-- 7. РОДИТЕЛЯМ (с подменю) -->
+    <li class="has-submenu">
+        <a href="parents.html" onclick="return handleSubmenuClick(event, this)">Родителям</a>
+        <ul class="submenu">
+            <li><a href="parents.html#o-predmete">О предмете ОБЗР</a></li>
+            <li><a href="parents.html#uchebno-polevye-sbory">Учебно-полевые сборы</a></li>
+            <li><a href="parents.html#grafik-konsultacij">График консультаций</a></li>
+            <li><a href="parents.html#faq">Часто задаваемые вопросы (FAQ)</a></li>
+            <li><a href="parents.html#poleznye-resursy">Полезные ресурсы для родителей</a></li>
+        </ul>
+    </li>
+
+    <!-- 8. КОНТАКТЫ (БЕЗ подменю) -->
+    <li>
+        <a href="contacts.html">Контакты</a>
+    </li>
+</ul>                                              
             </div>
         </nav>
     </header>
@@ -702,6 +921,38 @@ document.addEventListener('keydown', function(event) {
     qrFloatingButton.addEventListener('click', function(e) {
         e.stopPropagation();
     });
+    / Обработка клика по пункту с подменю на мобильных устройствах
+function handleSubmenuClick(event, element) {
+    // Проверяем, мобильное ли устройство (ширина экрана <= 768px)
+    if (window.innerWidth <= 768) {
+        event.preventDefault(); // Отменяем переход по ссылке
+        
+        const parentLi = element.parentElement;
+        
+        // Закрываем другие открытые подменю
+        document.querySelectorAll('.has-submenu.open').forEach(item => {
+            if (item !== parentLi) {
+                item.classList.remove('open');
+            }
+        });
+        
+        // Переключаем состояние текущего подменю
+        parentLi.classList.toggle('open');
+        
+        return false; // Не переходим по ссылке
+    }
+    return true; // На десктопе разрешаем переход по ссылке
+}
+
+// Закрытие подменю при клике вне его (только для мобильных)
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.has-submenu') && window.innerWidth <= 768) {
+        document.querySelectorAll('.has-submenu.open').forEach(item => {
+            item.classList.remove('open');
+        });
+    }
+});
 </script> 
 </body>
+
 </html>

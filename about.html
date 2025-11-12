@@ -1213,8 +1213,29 @@ document.addEventListener('click', function(event) {
         });
     }
 });
- 
+ <script>
+// Автоматическое выделение активного пункта меню
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const menuLinks = document.querySelectorAll('.nav-menu a');
+    
+    menuLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage) {
+            link.classList.add('active');
+            
+            // Если это подпункт, выделяем также родительский пункт
+            const parentLi = link.closest('li').parentElement.closest('li');
+            if (parentLi) {
+                const parentLink = parentLi.querySelector('a');
+                if (parentLink) parentLink.classList.add('active');
+            }
+        }
+    });
+});
+</script>
 </script> 
 </body>
 </html>
+
 

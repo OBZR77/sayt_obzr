@@ -806,16 +806,89 @@
         </div>
         <nav>
             <div class="nav-container">
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="about.html">О себе</a></li>
-                    <li><a href="portfolio.html">Портфолио</a></li>
-                    <li><a href="metodika.html" class="active">Методика</a></li>
-                    <li><a href="ai-projects.html">ИИ в образовании</a></li>
-                    <li><a href="vneurochnaya.html">Активности</a></li>
-                    <li><a href="parents.html">Родителям</a></li>
-                    <li><a href="contacts.html">Контакты</a></li>
-                </ul>
+               <ul class="nav-menu" id="navMenu">
+    <!-- 1. ГЛАВНАЯ (с подменю) -->
+    <li class="has-submenu">
+        <a href="index.html" class="active" onclick="return handleSubmenuClick(event, this)">Главная</a>
+        <ul class="submenu">
+            <li><a href="index.html#o-predmete-obzr">О предмете ОБЗР</a></li>
+            <li><a href="index.html#novosti">Последние новости</a></li>
+        </ul>
+    </li>
+
+    <!-- 2. О СЕБЕ (с подменю) -->
+    <li class="has-submenu">
+        <a href="about.html" onclick="return handleSubmenuClick(event, this)">О себе</a>
+        <ul class="submenu">
+            <li><a href="about.html#obrazovanie">Образование</a></li>
+            <li><a href="about.html#perepodgotovka">Переподготовка и повышение квалификации</a></li>
+            <li><a href="about.html#nagrady">Награды и достижения</a></li>
+        </ul>
+    </li>
+
+    <!-- 3. ПОРТФОЛИО (с подменю) -->
+    <li class="has-submenu">
+        <a href="portfolio.html" onclick="return handleSubmenuClick(event, this)">Портфолио</a>
+        <ul class="submenu">
+            <li><a href="portfolio.html#rezultaty-obucheniya">Результаты освоения ОБЗР обучающимися</a></li>
+            <li><a href="portfolio.html#dostizheniya-uchenikov">Достижения учащихся</a></li>
+            <li><a href="portfolio.html#metodicheskaya-aktivnost">Методическая активность</a></li>
+            <li><a href="portfolio.html#dokumenty">Документы портфолио</a></li>
+        </ul>
+    </li>
+
+    <!-- 4. МЕТОДИКА (с подменю) -->
+    <li class="has-submenu">
+        <a href="metodika.html" onclick="return handleSubmenuClick(event, this)">Методика</a>
+        <ul class="submenu">
+            <li><a href="metodika.html#normativnaya-dokumentaciya">Нормативная документация</a></li>
+            <li><a href="metodika.html#konspekty-urokov">Конспекты уроков по модулям</a></li>
+            <li><a href="metodika.html#prezentacii-testy">Презентации, наглядные материалы, тесты и контрольные</a></li>
+            <li><a href="metodika.html#metodicheskie-rekomendacii">Методические рекомендации для коллег</a></li>
+        </ul>
+    </li>
+
+    <!-- 5. ИИ В ОБРАЗОВАНИИ (с подменю) -->
+    <li class="has-submenu">
+        <a href="ai-projects.html" onclick="return handleSubmenuClick(event, this)">ИИ в образовании</a>
+        <ul class="submenu">
+            <li><a href="ai-projects.html#dlya-uchenikov">Для учеников - Творческие проекты</a></li>
+            <li><a href="ai-projects.html#dlya-roditelej">Для родителей - практические материалы</a></li>
+            <li><a href="ai-projects.html#dlya-kolleg">Для коллег - методические материалы</a></li>
+            <li><a href="ai-projects.html#poleznye-resursy">Полезные ресурсы по ИИ в образовании</a></li>
+        </ul>
+    </li>
+
+    <!-- 6. АКТИВНОСТИ (с подменю) -->
+    <li class="has-submenu">
+        <a href="vneurochnaya.html" onclick="return handleSubmenuClick(event, this)">Активности</a>
+        <ul class="submenu">
+            <li><a href="vneurochnaya.html#yunarmiya">Юнармия</a></li>
+            <li><a href="vneurochnaya.html#yuid">ЮИД (Юные инспекторы движения)</a></li>
+            <li><a href="vneurochnaya.html#zarnica">Зарница 2.0</a></li>
+            <li><a href="vneurochnaya.html#olimpiady">Олимпиады по ОБЗР</a></li>
+            <li><a href="vneurochnaya.html#uchebno-polevye-sbory">Учебно-полевые сборы</a></li>
+            <li><a href="vneurochnaya.html#vzaimodejstvie">Взаимодействие с партнёрами</a></li>
+        </ul>
+    </li>
+
+    <!-- 7. РОДИТЕЛЯМ (с подменю) -->
+    <li class="has-submenu">
+        <a href="parents.html" onclick="return handleSubmenuClick(event, this)">Родителям</a>
+        <ul class="submenu">
+            <li><a href="parents.html#o-predmete">О предмете ОБЗР</a></li>
+            <li><a href="parents.html#uchebno-polevye-sbory">Учебно-полевые сборы</a></li>
+            <li><a href="parents.html#grafik-konsultacij">График консультаций</a></li>
+            <li><a href="parents.html#faq">Часто задаваемые вопросы (FAQ)</a></li>
+            <li><a href="parents.html#poleznye-resursy">Полезные ресурсы для родителей</a></li>
+        </ul>
+    </li>
+
+    <!-- 8. КОНТАКТЫ (БЕЗ подменю) -->
+    <li>
+        <a href="contacts.html">Контакты</a>
+    </li>
+</ul>
             </div>
         </nav>
     </header>
@@ -837,7 +910,6 @@
         <!-- СЕКЦИЯ 1: Нормативная документация -->
         <!-- ============================================ -->
       <section id="normativnaya-dokumentaciya">
-    <h2>Нормативная документация</h2> 
         <section class="content-section">
             <div class="accordion-header" 
                  tabindex="0" 
@@ -921,7 +993,6 @@
         <!-- СЕКЦИЯ 2: Конспекты уроков -->
         <!-- ============================================ -->
        <section id="konspekty-urokov">
-    <h2>Конспекты уроков по модулям</h2>
           <section class="content-section">
             <div class="accordion-header" 
                  tabindex="0" 
@@ -2051,3 +2122,4 @@ document.addEventListener('click', function(event) {
 </body>
 
 </html>
+

@@ -983,10 +983,74 @@ document.addEventListener('keydown', function(event) {
     }
 </style>
 
-<!-- JavaScript для работы кнопки -->
 <script>
     // ============================================
-    // ПЕРЕТАСКИВАНИЕ КНОПКИ (DRAG & DROP)
+    // ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ МОБИЛЬНОГО МЕНЮ
+    // ============================================
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    // ============================================
+    // АВТОМАТИЧЕСКОЕ ВЫДЕЛЕНИЕ АКТИВНОГО ПУНКТА МЕНЮ
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Получаем текущую страницу
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const menuLinks = document.querySelectorAll('.nav-menu a');
+        
+        menuLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            
+            // Проверяем точное совпадение страницы (без якорей)
+            const linkPage = href.split('#')[0];
+            
+            if (linkPage === currentPage || 
+                (currentPage === '' && linkPage === 'index.html')) {
+                link.classList.add('active');
+                
+                // Если это подпункт, выделяем также родительский пункт
+                const parentLi = link.closest('li').parentElement.closest('li');
+                if (parentLi && parentLi.classList.contains('has-submenu')) {
+                    const parentLink = parentLi.querySelector('a');
+                    if (parentLink) parentLink.classList.add('active');
+                }
+            }
+        });
+    });
+
+    // ============================================
+    // ОБРАБОТКА ПОДМЕНЮ НА МОБИЛЬНЫХ
+    // ============================================
+    function handleSubmenuClick(event, element) {
+        if (window.innerWidth <= 768) {
+            event.preventDefault();
+            
+            const parentLi = element.parentElement;
+            
+            document.querySelectorAll('.has-submenu.open').forEach(item => {
+                if (item !== parentLi) {
+                    item.classList.remove('open');
+                }
+            });
+            
+            parentLi.classList.toggle('open');
+            return false;
+        }
+        return true;
+    }
+
+    // Закрытие подменю при клике вне его (только для мобильных)
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.has-submenu') && window.innerWidth <= 768) {
+            document.querySelectorAll('.has-submenu.open').forEach(item => {
+                item.classList.remove('open');
+            });
+        }
+    });
+
+    // ============================================
+    // ПЛАВАЮЩАЯ КНОПКА С QR-КОДОМ (ВАШ КОД БЕЗ ИЗМЕНЕНИЙ)
     // ============================================
     
     const qrFloatingButton = document.getElementById('qrFloatingButton');
@@ -1000,7 +1064,6 @@ document.addEventListener('keydown', function(event) {
     let dragStartTime = 0;
     let hasMoved = false;
     
-    // Получаем сохранённую позицию из localStorage
     function loadButtonPosition() {
         const savedPos = localStorage.getItem('qrButtonPosition');
         if (savedPos) {
@@ -1012,17 +1075,14 @@ document.addEventListener('keydown', function(event) {
         }
     }
     
-    // Сохраняем позицию в localStorage
     function saveButtonPosition(x, y) {
         localStorage.setItem('qrButtonPosition', JSON.stringify({ x, y }));
     }
     
-    // Начало перетаскивания (мышь)
     qrFloatingButton.addEventListener('mousedown', function(e) {
         startDragging(e.clientX, e.clientY);
     });
     
-    // Начало перетаскивания (тач)
     qrFloatingButton.addEventListener('touchstart', function(e) {
         const touch = e.touches[0];
         startDragging(touch.clientX, touch.clientY);
@@ -1038,12 +1098,9 @@ document.addEventListener('keydown', function(event) {
         offsetY = clientY - rect.top;
         
         qrFloatingButton.classList.add('dragging');
-        
-        // Скрываем подсказку
         qrButtonHint.style.display = 'none';
     }
     
-    // Перемещение (мышь)
     document.addEventListener('mousemove', function(e) {
         if (isDragging) {
             e.preventDefault();
@@ -1051,7 +1108,6 @@ document.addEventListener('keydown', function(event) {
         }
     });
     
-    // Перемещение (тач)
     document.addEventListener('touchmove', function(e) {
         if (isDragging) {
             const touch = e.touches[0];
@@ -1065,7 +1121,6 @@ document.addEventListener('keydown', function(event) {
         currentX = clientX - offsetX;
         currentY = clientY - offsetY;
         
-        // Ограничиваем позицию в пределах экрана
         const maxX = window.innerWidth - qrFloatingButton.offsetWidth;
         const maxY = window.innerHeight - qrFloatingButton.offsetHeight;
         
@@ -1078,12 +1133,10 @@ document.addEventListener('keydown', function(event) {
         qrFloatingButton.style.bottom = 'auto';
     }
     
-    // Конец перетаскивания (мышь)
     document.addEventListener('mouseup', function() {
         endDragging();
     });
     
-    // Конец перетаскивания (тач)
     document.addEventListener('touchend', function() {
         endDragging();
     });
@@ -1094,11 +1147,9 @@ document.addEventListener('keydown', function(event) {
             
             const dragDuration = Date.now() - dragStartTime;
             
-            // Если кнопку НЕ двигали или двигали меньше 200мс — это клик
             if (!hasMoved || dragDuration < 200) {
                 openQRModal();
             } else {
-                // Сохраняем позицию
                 saveButtonPosition(currentX, currentY);
             }
             
@@ -1106,36 +1157,28 @@ document.addEventListener('keydown', function(event) {
         }
     }
     
-    // Открытие модального окна
     function openQRModal() {
         qrModalWindow.style.display = 'flex';
         document.body.classList.add('modal-open');
         qrModalWindow.scrollTop = 0;
     }
     
-    // Закрытие модального окна
     function closeQRModal() {
         qrModalWindow.style.display = 'none';
         document.body.classList.remove('modal-open');
     }
     
-    // Закрытие при клике вне окна
     qrModalWindow.addEventListener('click', function(event) {
         if (event.target === qrModalWindow) {
             closeQRModal();
         }
     });
     
-    // Закрытие по ESC
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' && qrModalWindow.style.display === 'flex') {
             closeQRModal();
         }
     });
-    
-    // ============================================
-    // ПОДСКАЗКА ПРИ ПЕРВОМ ПОСЕЩЕНИИ
-    // ============================================
     
     function showHintIfNeeded() {
         const hintShown = localStorage.getItem('qrButtonHintShown');
@@ -1143,7 +1186,6 @@ document.addEventListener('keydown', function(event) {
             setTimeout(() => {
                 qrButtonHint.style.display = 'block';
                 
-                // Скрыть через 5 секунд
                 setTimeout(() => {
                     qrButtonHint.style.opacity = '0';
                     qrButtonHint.style.transition = 'opacity 0.5s ease';
@@ -1157,15 +1199,10 @@ document.addEventListener('keydown', function(event) {
         }
     }
     
-    // ============================================
-    // ИНИЦИАЛИЗАЦИЯ
-    // ============================================
-    
     window.addEventListener('load', function() {
         loadButtonPosition();
         showHintIfNeeded();
         
-        // Плавное появление кнопки
         setTimeout(function() {
             qrFloatingButton.style.opacity = '0';
             qrFloatingButton.style.transform = 'scale(0)';
@@ -1178,44 +1215,13 @@ document.addEventListener('keydown', function(event) {
         }, 500);
     });
     
-    // Предотвращаем случайное перетаскивание при быстром клике
     qrFloatingButton.addEventListener('click', function(e) {
         e.stopPropagation();
     });
-   // Обработка клика по пункту с подменю на мобильных устройствах
-function handleSubmenuClick(event, element) {
-    // Проверяем, мобильное ли устройство (ширина экрана <= 768px)
-    if (window.innerWidth <= 768) {
-        event.preventDefault(); // Отменяем переход по ссылке
-        
-        const parentLi = element.parentElement;
-        
-        // Закрываем другие открытые подменю
-        document.querySelectorAll('.has-submenu.open').forEach(item => {
-            if (item !== parentLi) {
-                item.classList.remove('open');
-            }
-        });
-        
-        // Переключаем состояние текущего подменю
-        parentLi.classList.toggle('open');
-        
-        return false; // Не переходим по ссылке
-    }
-    return true; // На десктопе разрешаем переход по ссылке
-}
-
-// Закрытие подменю при клике вне его (только для мобильных)
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('.has-submenu') && window.innerWidth <= 768) {
-        document.querySelectorAll('.has-submenu.open').forEach(item => {
-            item.classList.remove('open');
-        });
-    }
-});
-</script> 
+</script>
 </body>
 </html>
+
 
 
 

@@ -1845,9 +1845,112 @@
             </p>
         </div>
     </div>
-   <script src="script.js"></script>
+ <!-- JavaScript для lightbox эмблемы -->
+<style>
+@keyframes zoomIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+</style>
+
+<script>
+function openLightbox() {
+    document.getElementById('emblem-lightbox').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Блокируем скролл
+}
+
+function closeLightbox() {
+    document.getElementById('emblem-lightbox').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Возвращаем скролл
+}
+
+// Закрытие по клавише Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeLightbox();
+    }
+});
+
+// ============================================
+// ACCORDION (раскрытие секций)
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // === ГЛАВНЫЕ АККОРДЕОНЫ (секции) ===
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const isActive = this.classList.contains('active');
+            
+            // Закрываем все другие секции
+            accordionHeaders.forEach(otherHeader => {
+                if (otherHeader !== this) {
+                    otherHeader.classList.remove('active');
+                    otherHeader.setAttribute('aria-expanded', 'false');
+                    const otherContent = otherHeader.nextElementSibling;
+                    if (otherContent) {
+                        otherContent.classList.remove('active');
+                    }
+                }
+            });
+            
+            // Переключаем текущую секцию
+            this.classList.toggle('active');
+            content.classList.toggle('active');
+            this.setAttribute('aria-expanded', !isActive);
+        });
+        
+        // Поддержка клавиатуры
+        header.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+    
+    // === МОДУЛЬНЫЕ АККОРДЕОНЫ (внутри секций) ===
+    const moduleHeaders = document.querySelectorAll('.module-header');
+    
+    moduleHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const isActive = this.classList.contains('active');
+            
+            // Переключаем состояние
+            this.classList.toggle('active');
+            content.classList.toggle('active');
+            this.setAttribute('aria-expanded', !isActive);
+        });
+        
+        // Поддержка клавиатуры
+        header.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+});
+
+// Мобильное меню
+function toggleMenu() {
+    const menu = document.getElementById('navMenu');
+    menu.classList.toggle('active');
+}
+</script>
+<script src="script.js"></script>
 </body>
 </html>
+
 
 
 

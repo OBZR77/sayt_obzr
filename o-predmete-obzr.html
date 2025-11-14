@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -185,6 +186,28 @@
             opacity: 1;
         }
 
+        /* СПЕЦИАЛЬНО ДЛЯ СТРАНИЦЫ O-PREDMETE-OBZR.HTML - красный фон подменю */
+        body.page-o-predmete-obzr .submenu {
+            background-color: var(--color-danger); /* Красный фон */
+        }
+
+        body.page-o-predmete-obzr .submenu a {
+            color: white; /* Белый текст */
+        }
+
+        body.page-o-predmete-obzr .submenu a:hover {
+            background-color: white; /* Белый фон при hover */
+            color: var(--color-primary); /* СИНИЙ текст при hover */
+        }
+
+        body.page-o-predmete-obzr .submenu a::before {
+            color: white; /* Белая стрелка по умолчанию */
+        }
+
+        body.page-o-predmete-obzr .submenu a:hover::before {
+            color: var(--color-danger); /* КРАСНАЯ стрелка при hover */
+        }
+
         .submenu-divider {
             height: 1px;
             background-color: var(--color-border);
@@ -245,6 +268,24 @@
             
             .submenu a:hover {
                 padding-left: 2.5rem;
+            }
+
+            /* Красное подменю для o-predmete-obzr в мобильной версии */
+            body.page-o-predmete-obzr .submenu {
+                background-color: var(--color-danger);
+            }
+
+            body.page-o-predmete-obzr .submenu a {
+                color: white;
+            }
+
+            body.page-o-predmete-obzr .submenu a:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+                color: white;
+            }
+
+            body.page-o-predmete-obzr .submenu a::before {
+                color: white;
             }
         }
         
@@ -519,19 +560,15 @@
         }
     </style>
 </head>
-<body>
+<body class="page-o-predmete-obzr">
     <header>
         <div class="header-top">
             <div class="header-content">
                 <div class="header-title">
-                    <!-- Эмблема с lightbox -->
-                    <img src="images/emblem-obzr.png.png" alt="Эмблема ОБЗР СШ 2 Лысково" onclick="openLightbox()" style="width: 80px; height: 80px; margin-right: 1rem; object-fit: contain; filter: drop-shadow(0 3px 10px rgba(0,0,0,0.25)); cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-
-                    <!-- Lightbox overlay -->
-                    <div id="emblem-lightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center;" onclick="closeLightbox()">
-                        <span style="position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; transition: color 0.3s;" onmouseover="this.style.color='#E53935'" onmouseout="this.style.color='white'">&times;</span>
-                        <img src="images/emblem-obzr.png.png" alt="Эмблема ОБЗР СШ 2 Лысково" style="max-width: 80%; max-height: 80%; object-fit: contain; animation: zoomIn 0.3s ease;" onclick="event.stopPropagation()">
-                    </div>
+                    <!-- Эмблема (кликабельная - ведёт на главную) -->
+                    <a href="index.html" style="display: block; line-height: 0;">
+                        <img src="images/emblem-obzr.png.png" alt="Эмблема ОБЗР СШ 2 Лысково - вернуться на главную" style="width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 3px 10px rgba(0,0,0,0.25)); cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
 
                     <div>
                         <h1>Дёмин Александр Юрьевич</h1>

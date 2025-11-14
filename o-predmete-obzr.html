@@ -1048,134 +1048,223 @@
             }
         });
 
-        // ============================================
-        // ПЕРЕТАСКИВАЕМАЯ КНОПКА QR-КОДА
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const qrButton = document.getElementById('qrFloatingButton');
-            const qrHint = document.getElementById('qrButtonHint');
-            let isDragging = false;
-            let startX, startY;
-            let initialX, initialY;
-            let moveThreshold = 10;
-            let hasMoved = false;
+      // ============================================
+// ПЕРЕТАСКИВАЕМАЯ КНОПКА QR-КОДА С СОХРАНЕНИЕМ ПОЗИЦИИ
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const qrButton = document.getElementById('qrFloatingButton');
+    const qrHint = document.getElementById('qrButtonHint');
+    let isDragging = false;
+    let startX, startY;
+    let initialX, initialY;
+    let moveThreshold = 10;
+    let hasMoved = false;
+    let doubleClickTimer = null;
 
-            // Показываем подсказку при первом посещении
-            if (!localStorage.getItem('qrHintShown')) {
-                setTimeout(() => {
-                    qrHint.style.display = 'block';
-                    setTimeout(() => {
-                        qrHint.style.display = 'none';
-                        localStorage.setItem('qrHintShown', 'true');
-                    }, 4000);
-                }, 1000);
+    // === ВОССТАНОВЛЕНИЕ СОХРАНЁННОЙ ПОЗИЦИИ ===
+    function loadPosition() {
+        const savedPosition = localStorage.getItem('qrButtonPosition');
+        if (savedPosition) {
+            const { left, top } = JSON.parse(savedPosition);
+            
+            // Проверяем, что позиция в пределах экрана
+            const maxX = window.innerWidth - qrButton.offsetWidth;
+            const maxY = window.innerHeight - qrButton.offsetHeight;
+            
+            const boundedLeft = Math.max(0, Math.min(left, maxX));
+            const boundedTop = Math.max(0, Math.min(top, maxY));
+            
+            qrButton.style.left = boundedLeft + 'px';
+            qrButton.style.top = boundedTop + 'px';
+            qrButton.style.bottom = 'auto';
+            qrButton.style.right = 'auto';
+        }
+    }
+
+    // === СОХРАНЕНИЕ ТЕКУЩЕЙ ПОЗИЦИИ ===
+    function savePosition() {
+        const rect = qrButton.getBoundingClientRect();
+        const position = {
+            left: rect.left,
+            top: rect.top
+        };
+        localStorage.setItem('qrButtonPosition', JSON.stringify(position));
+    }
+
+    // === СБРОС ПОЗИЦИИ (ДВОЙНОЙ КЛИК) ===
+    function resetPosition() {
+        localStorage.removeItem('qrButtonPosition');
+        qrButton.style.left = 'auto';
+        qrButton.style.top = 'auto';
+        qrButton.style.bottom = '30px';
+        qrButton.style.right = '30px';
+        
+        // Визуальная обратная связь
+        qrButton.style.animation = 'none';
+        setTimeout(() => {
+            qrButton.style.animation = 'pulse 2s infinite';
+        }, 10);
+    }
+
+    // Загружаем сохранённую позицию при загрузке страницы
+    loadPosition();
+
+    // Показываем подсказку при первом посещении
+    if (!localStorage.getItem('qrHintShown')) {
+        setTimeout(() => {
+            qrHint.style.display = 'block';
+            setTimeout(() => {
+                qrHint.style.display = 'none';
+                localStorage.setItem('qrHintShown', 'true');
+            }, 4000);
+        }, 1000);
+    }
+
+    // === DESKTOP (мышь) ===
+    qrButton.addEventListener('mousedown', function(e) {
+        // Обработка двойного клика для сброса позиции
+        if (doubleClickTimer) {
+            clearTimeout(doubleClickTimer);
+            doubleClickTimer = null;
+            resetPosition();
+            return;
+        }
+        
+        doubleClickTimer = setTimeout(() => {
+            doubleClickTimer = null;
+        }, 300);
+
+        isDragging = true;
+        hasMoved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = qrButton.getBoundingClientRect();
+        initialX = rect.left;
+        initialY = rect.top;
+        qrButton.classList.add('dragging');
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+        
+        if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
+            hasMoved = true;
+        }
+        
+        if (hasMoved) {
+            const newX = initialX + deltaX;
+            const newY = initialY + deltaY;
+            
+            const maxX = window.innerWidth - qrButton.offsetWidth;
+            const maxY = window.innerHeight - qrButton.offsetHeight;
+            
+            const boundedX = Math.max(0, Math.min(newX, maxX));
+            const boundedY = Math.max(0, Math.min(newY, maxY));
+            
+            qrButton.style.left = boundedX + 'px';
+            qrButton.style.top = boundedY + 'px';
+            qrButton.style.bottom = 'auto';
+            qrButton.style.right = 'auto';
+        }
+    });
+
+    document.addEventListener('mouseup', function() {
+        if (isDragging) {
+            qrButton.classList.remove('dragging');
+            
+            if (!hasMoved) {
+                openQRModal();
+            } else {
+                // Сохраняем новую позицию
+                savePosition();
             }
+            
+            isDragging = false;
+        }
+    });
 
-            // === DESKTOP (мышь) ===
-            qrButton.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                hasMoved = false;
-                startX = e.clientX;
-                startY = e.clientY;
-                const rect = qrButton.getBoundingClientRect();
-                initialX = rect.left;
-                initialY = rect.top;
-                qrButton.classList.add('dragging');
-                e.preventDefault();
-            });
+    // === MOBILE (тач) ===
+    qrButton.addEventListener('touchstart', function(e) {
+        // Обработка двойного тапа для сброса позиции
+        if (doubleClickTimer) {
+            clearTimeout(doubleClickTimer);
+            doubleClickTimer = null;
+            resetPosition();
+            return;
+        }
+        
+        doubleClickTimer = setTimeout(() => {
+            doubleClickTimer = null;
+        }, 300);
 
-            document.addEventListener('mousemove', function(e) {
-                if (!isDragging) return;
-                
-                const deltaX = e.clientX - startX;
-                const deltaY = e.clientY - startY;
-                
-                if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
-                    hasMoved = true;
-                }
-                
-                if (hasMoved) {
-                    const newX = initialX + deltaX;
-                    const newY = initialY + deltaY;
-                    
-                    const maxX = window.innerWidth - qrButton.offsetWidth;
-                    const maxY = window.innerHeight - qrButton.offsetHeight;
-                    
-                    const boundedX = Math.max(0, Math.min(newX, maxX));
-                    const boundedY = Math.max(0, Math.min(newY, maxY));
-                    
-                    qrButton.style.left = boundedX + 'px';
-                    qrButton.style.top = boundedY + 'px';
-                    qrButton.style.bottom = 'auto';
-                    qrButton.style.right = 'auto';
-                }
-            });
+        isDragging = true;
+        hasMoved = false;
+        const touch = e.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+        const rect = qrButton.getBoundingClientRect();
+        initialX = rect.left;
+        initialY = rect.top;
+        qrButton.classList.add('dragging');
+    }, { passive: true });
 
-            document.addEventListener('mouseup', function() {
-                if (isDragging) {
-                    qrButton.classList.remove('dragging');
-                    
-                    if (!hasMoved) {
-                        openQRModal();
-                    }
-                    
-                    isDragging = false;
-                }
-            });
+    document.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - startX;
+        const deltaY = touch.clientY - startY;
+        
+        if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
+            hasMoved = true;
+        }
+        
+        if (hasMoved) {
+            const newX = initialX + deltaX;
+            const newY = initialY + deltaY;
+            
+            const maxX = window.innerWidth - qrButton.offsetWidth;
+            const maxY = window.innerHeight - qrButton.offsetHeight;
+            
+            const boundedX = Math.max(0, Math.min(newX, maxX));
+            const boundedY = Math.max(0, Math.min(newY, maxY));
+            
+            qrButton.style.left = boundedX + 'px';
+            qrButton.style.top = boundedY + 'px';
+            qrButton.style.bottom = 'auto';
+            qrButton.style.right = 'auto';
+        }
+    }, { passive: true });
 
-            // === MOBILE (тач) ===
-            qrButton.addEventListener('touchstart', function(e) {
-                isDragging = true;
-                hasMoved = false;
-                const touch = e.touches[0];
-                startX = touch.clientX;
-                startY = touch.clientY;
-                const rect = qrButton.getBoundingClientRect();
-                initialX = rect.left;
-                initialY = rect.top;
-                qrButton.classList.add('dragging');
-            }, { passive: true });
+    document.addEventListener('touchend', function() {
+        if (isDragging) {
+            qrButton.classList.remove('dragging');
+            
+            if (!hasMoved) {
+                openQRModal();
+            } else {
+                // Сохраняем новую позицию
+                savePosition();
+            }
+            
+            isDragging = false;
+        }
+    });
 
-            document.addEventListener('touchmove', function(e) {
-                if (!isDragging) return;
-                
-                const touch = e.touches[0];
-                const deltaX = touch.clientX - startX;
-                const deltaY = touch.clientY - startY;
-                
-                if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
-                    hasMoved = true;
-                }
-                
-                if (hasMoved) {
-                    const newX = initialX + deltaX;
-                    const newY = initialY + deltaY;
-                    
-                    const maxX = window.innerWidth - qrButton.offsetWidth;
-                    const maxY = window.innerHeight - qrButton.offsetHeight;
-                    
-                    const boundedX = Math.max(0, Math.min(newX, maxX));
-                    const boundedY = Math.max(0, Math.min(newY, maxY));
-                    
-                    qrButton.style.left = boundedX + 'px';
-                    qrButton.style.top = boundedY + 'px';
-                    qrButton.style.bottom = 'auto';
-                    qrButton.style.right = 'auto';
-                }
-            }, { passive: true });
-
-            document.addEventListener('touchend', function() {
-                if (isDragging) {
-                    qrButton.classList.remove('dragging');
-                    
-                    if (!hasMoved) {
-                        openQRModal();
-                    }
-                    
-                    isDragging = false;
-                }
-            });
-        });
+    // === АДАПТАЦИЯ ПРИ ИЗМЕНЕНИИ РАЗМЕРА ОКНА ===
+    window.addEventListener('resize', function() {
+        const savedPosition = localStorage.getItem('qrButtonPosition');
+        if (savedPosition) {
+            // Перепроверяем границы при изменении размера окна
+            loadPosition();
+        }
+    });
+});
     </script>
 </body>
+
 </html>

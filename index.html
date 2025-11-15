@@ -137,7 +137,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: white;  /* БЕЛЫЙ ФОН */
+    background-color: white;  /* БЕЛЫЙ ФОН ПО УМОЛЧАНИЮ */
     min-width: 320px;
     max-width: 400px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
@@ -166,17 +166,16 @@
         .submenu li {
             margin: 0;
         }
-
-        .submenu a {
-            color: var(--color-text-primary);
-            text-decoration: none;
-            padding: 0.65rem 1.5rem;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
+.submenu a {
+    color: var(--color-text-primary);  /* ТЁМНЫЙ ТЕКСТ ПО УМОЛЧАНИЮ */
+    text-decoration: none;
+    padding: 0.65rem 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    line-height: 1.4;
+ }      
 .submenu a:hover {
     background-color: var(--color-surface);  /* СВЕТЛО-СЕРЫЙ ФОН ПРИ HOVER */
     color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
@@ -279,7 +278,7 @@
       main {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 1rem 3rem 1rem;  /* Уменьшили верхний отступ с 3rem до 2rem */
+    padding: 1rem 1rem 3rem 1rem;  /* Уменьшили верхний отступ с 3rem до 2rem */
 }
         section {
             margin-bottom: 4rem;

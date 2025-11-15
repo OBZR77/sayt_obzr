@@ -139,25 +139,63 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #E53935;  /* КРАСНЫЙ ФОН ПО УМОЛЧАНИЮ */
+    background-color: white;  /* БЕЛЫЙ ФОН (для отступов) */
     min-width: 320px;
     max-width: 400px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     border-radius: 0 0 8px 8px;
     list-style: none;
-    padding: 0.75rem 0;
+    padding: 0.75rem 0;  /* БЕЛЫЕ ОТСТУПЫ СВЕРХУ/СНИЗУ */
     margin: 0;
     
-    /* Скрываем по умолчанию */
     opacity: 0;
     visibility: hidden;
     transform: translateY(-15px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
     transition-delay: 0s;
     
-    /* Граница сверху */
     border-top: 3px solid var(--color-danger);
     z-index: 1000;
+}
+
+/* КРАСНЫЙ ФОН ДЛЯ АКТИВНОЙ СТРАНИЦЫ - НА ПУНКТАХ МЕНЮ */
+.nav-menu > li.has-submenu > a.active + .submenu li {
+    background-color: #E53935;  /* КРАСНЫЙ ФОН НА <li> */
+}
+
+.nav-menu > li.has-submenu > a.active + .submenu a {
+    color: white;  /* БЕЛЫЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a.active + .submenu a:hover {
+    background-color: white;  /* БЕЛЫЙ ФОН ПРИ HOVER */
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a.active + .submenu a::before {
+    color: white;  /* БЕЛАЯ СТРЕЛКА */
+}
+
+.nav-menu > li.has-submenu > a.active + .submenu a:hover::before {
+    color: var(--color-danger);  /* КРАСНАЯ СТРЕЛКА ПРИ HOVER */
+}
+
+/* БЕЛОЕ ПОДМЕНЮ ДЛЯ НЕАКТИВНЫХ СТРАНИЦ */
+.nav-menu > li.has-submenu > a:not(.active) + .submenu li {
+    background-color: white;  /* БЕЛЫЙ ФОН */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a {
+    color: var(--color-text-primary);  /* ТЁМНЫЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a:hover {
+    background-color: var(--color-surface);  /* СВЕТЛО-СЕРЫЙ ФОН */
+    color: var(--color-primary);
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a::before {
+    color: var(--color-danger);
 }
 
 /* Показываем при наведении с задержкой 350ms */

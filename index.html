@@ -133,30 +133,29 @@
         .nav-menu > li.has-submenu > a:hover {
             background-color: var(--color-primary-hover);
         }
-
-        .submenu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 320px;
-            max-width: 400px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-            border-radius: 0 0 8px 8px;
-            list-style: none;
-            padding: 0.75rem 0;
-            margin: 0;
-            
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-15px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-            transition-delay: 0s;
-            
-            border-top: 3px solid var(--color-danger);
-            z-index: 1000;
-        }
-
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #E53935;  /* КРАСНЫЙ ФОН */
+    min-width: 320px;
+    max-width: 400px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 0 0 8px 8px;
+    list-style: none;
+    padding: 0.75rem 0;
+    margin: 0;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    transition-delay: 0s;
+    
+    border-top: 3px solid var(--color-danger);
+    z-index: 1000;
+}
+    
         .nav-menu > li.has-submenu:hover .submenu {
             opacity: 1;
             visibility: visible;
@@ -178,25 +177,35 @@
             font-size: 0.95rem;
             line-height: 1.4;
         }
+.submenu a {
+    color: white;  /* БЕЛЫЙ ТЕКСТ */
+    text-decoration: none;
+    padding: 0.65rem 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+.submenu a:hover {
+    background-color: white;  /* БЕЛЫЙ ФОН ПРИ HOVER */
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
+    padding-left: 2rem;
+}
 
-        .submenu a:hover {
-            background-color: var(--color-surface);
-            color: var(--color-primary);
-            padding-left: 2rem;
-        }
+.submenu a::before {
+    content: '→';
+    margin-right: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: white;  /* БЕЛАЯ СТРЕЛКА ПО УМОЛЧАНИЮ */
+    font-weight: bold;
+}
 
-        .submenu a::before {
-            content: '→';
-            margin-right: 0.75rem;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            color: var(--color-danger);
-            font-weight: bold;
-        }
-
-        .submenu a:hover::before {
-            opacity: 1;
-        }
+.submenu a:hover::before {
+    opacity: 1;
+    color: var(--color-danger);  /* КРАСНАЯ СТРЕЛКА ПРИ HOVER */
+}
 
         @keyframes zoomIn {
             from {
@@ -343,6 +352,35 @@
             left: 0;
             font-size: 1.3rem;
         }
+        .obzr-button {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    background-color: white;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 1.5rem;
+}
+
+.obzr-button:hover {
+    background-color: var(--color-danger);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(229, 57, 53, 0.4);
+}
+
+.obzr-button::after {
+    content: ' →';
+    margin-left: 0.5rem;
+    transition: margin-left 0.3s ease;
+}
+
+.obzr-button:hover::after {
+    margin-left: 1rem;
+}
 
         /* СТАТИСТИКА (4 БЛОКА В РЯДУ) */
         .obzr-stats {
@@ -963,20 +1001,20 @@
             </p>
 
             <!-- СИНИЙ БЛОК "ЧТО ТАКОЕ ОБЗР?" -->
-            <div class="obzr-blue-box">
-                <h3>Что такое ОБЗР?</h3>
-                <p>
-                    С 1 сентября 2024 года предмет <strong>ОБЖ (Основы безопасности жизнедеятельности)</strong> преобразован в 
-                    <strong>ОБЗР (Основы безопасности и защиты Родины)</strong> — комплексный курс, объединяющий:
-                </p>
-                <ul>
-                    <li>Безопасность жизнедеятельности во всех сферах</li>
-                    <li>Элементы военной подготовки и допризывной подготовки</li>
-                    <li>Патриотическое воспитание и гражданскую ответственность</li>
-                    <li>Практические навыки поведения в чрезвычайных ситуациях</li>
-                </ul>
-            </div>
-
+         <div class="obzr-blue-box">
+    <h3>Что такое ОБЗР?</h3>
+    <p>
+        С 1 сентября 2024 года предмет <strong>ОБЖ (Основы безопасности жизнедеятельности)</strong> преобразован в 
+        <strong>ОБЗР (Основы безопасности и защиты Родины)</strong> — комплексный курс, объединяющий:
+    </p>
+    <ul>
+        <li>Безопасность жизнедеятельности во всех сферах</li>
+        <li>Элементы военной подготовки и допризывной подготовки</li>
+        <li>Патриотическое воспитание и гражданскую ответственность</li>
+        <li>Практические навыки поведения в чрезвычайных ситуациях</li>
+    </ul>
+    <a href="o-predmete-obzr.html" class="obzr-button">Подробнее о предмете</a>
+</div>
             <!-- СТАТИСТИКА (4 БЛОКА) -->
             <div class="obzr-stats">
                 <div class="stat-card">
@@ -1334,11 +1372,21 @@
             menu.classList.toggle('active');
         }
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 if (href !== '#') {
                     e.preventDefault();
                     const target = document.querySelector(href);
                     if (target) {
-                        ta
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>    

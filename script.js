@@ -31,6 +31,22 @@ document.addEventListener('DOMContentLoaded', function() {
         currentPage = 'index.html';
     }
     
+    // ===== СПЕЦИАЛЬНАЯ ЛОГИКА ДЛЯ ПОДСТРАНИЦ "ИИ в образовании" =====
+    const aiPages = [
+        'ai-dlya-uchenikov.html',
+        'ai-dlya-roditelej.html', 
+        'ai-dlya-kolleg.html',
+        'ai-poleznye-resursy.html'
+    ];
+    
+    // Если текущая страница — подстраница "ИИ в образовании"
+    if (aiPages.includes(currentPage)) {
+        const aiLink = document.querySelector('a[href="ai-projects.html"]');
+        if (aiLink) {
+            aiLink.classList.add('active');
+            return; // Прекращаем дальнейший поиск
+        }
+    }
     // Находим все ссылки в меню
     const menuLinks = document.querySelectorAll('.nav-menu a');
     
@@ -334,3 +350,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 console.log('✅ Скрипт сайта ОБЗР загружен успешно');
 
 console.log('📄 Текущая страница:', window.location.pathname.split('/').pop() || 'index.html');
+

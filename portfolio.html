@@ -114,93 +114,145 @@
             background-color: var(--color-danger);
         }
         
-        /* ВЫПАДАЮЩЕЕ ПОДМЕНЮ */
-        .nav-menu > li.has-submenu {
-            position: relative;
-        }
+         /* ВЫПАДАЮЩИЕ ПОДМЕНЮ */
+     .nav-menu > li.has-submenu {
+    position: relative;
+}
 
-        .nav-menu > li.has-submenu > a:hover {
-            background-color: var(--color-primary-hover);
-        }
+.nav-menu > li.has-submenu > a:hover {
+    background-color: var(--color-primary-hover);
+}
 
-        .submenu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 320px;
-            max-width: 400px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-            border-radius: 0 0 8px 8px;
-            list-style: none;
-            padding: 0.75rem 0;
-            margin: 0;
-            
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-15px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-            transition-delay: 0s;
-            
-            border-top: 3px solid var(--color-danger);
-            z-index: 1000;
-        }
+/* Стили выпадающего подменю - БАЗОВОЕ КРАСНОЕ */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;  /* БЕЛЫЙ ФОН (для отступов) */
+    min-width: 320px;
+    max-width: 400px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 0 0 8px 8px;
+    list-style: none;
+    padding: 0.75rem 0;  /* БЕЛЫЕ ОТСТУПЫ СВЕРХУ/СНИЗУ */
+    margin: 0;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    transition-delay: 0s;
+    
+    border-top: 3px solid var(--color-danger);
+    z-index: 1000;
+}
 
-        .nav-menu > li.has-submenu:hover .submenu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            transition-delay: 0.35s;
-        }
+/* КРАСНЫЙ ФОН ДЛЯ АКТИВНОЙ СТРАНИЦЫ - НА ПУНКТАХ МЕНЮ */
+.nav-menu > li.has-submenu > a.active + .submenu li {
+    background-color: #E53935;  /* КРАСНЫЙ ФОН НА <li> */
+}
 
-        .submenu li {
-            margin: 0;
-        }
+.nav-menu > li.has-submenu > a.active + .submenu a {
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
+}
 
-        .submenu a {
-            color: var(--color-text-primary);
-            text-decoration: none;
-            padding: 0.65rem 1.5rem;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
+.nav-menu > li.has-submenu > a.active + .submenu a:hover {
+    background-color: white;  /* БЕЛЫЙ ФОН ПРИ HOVER */
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
+}
 
-        .submenu a:hover {
-            background-color: var(--color-surface);
-            color: var(--color-primary);
-            padding-left: 2rem;
-        }
+.nav-menu > li.has-submenu > a.active + .submenu a::before {
+    color: white;  /* БЕЛАЯ СТРЕЛКА */
+}
 
-        .submenu a::before {
-            content: '→';
-            margin-right: 0.75rem;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            color: var(--color-danger);
-            font-weight: bold;
-        }
+.nav-menu > li.has-submenu > a.active + .submenu a:hover::before {
+    color: var(--color-danger);  /* КРАСНАЯ СТРЕЛКА ПРИ HOVER */
+}
 
-        .submenu a:hover::before {
-            opacity: 1;
-        }
+/* БЕЛОЕ ПОДМЕНЮ ДЛЯ НЕАКТИВНЫХ СТРАНИЦ */
+.nav-menu > li.has-submenu > a:not(.active) + .submenu li {
+    background-color: white;  /* БЕЛЫЙ ФОН */
+}
 
-        .submenu-divider {
-            height: 1px;
-            background-color: var(--color-border);
-            margin: 0.5rem 1rem;
-        }
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a {
+    color: var(--color-text-primary);  /* ТЁМНЫЙ ТЕКСТ */
+}
 
-        .submenu-header {
-            padding: 0.5rem 1.5rem 0.25rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--color-text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a:hover {
+    background-color: var(--color-surface);  /* СВЕТЛО-СЕРЫЙ ФОН */
+    color: var(--color-primary);
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a::before {
+    color: var(--color-danger);
+}
+
+/* Показываем при наведении с задержкой 350ms */
+.nav-menu > li.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0.35s;
+}
+
+/* Стили пунктов подменю - БЕЛЫЙ ТЕКСТ */
+.submenu li {
+    margin: 0;
+}
+
+.submenu a {
+    color: white;  /* БЕЛЫЙ ТЕКСТ */
+    text-decoration: none;
+    padding: 0.65rem 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.submenu a:hover {
+    background-color: white;  /* БЕЛЫЙ ФОН ПРИ HOVER */
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ ПРИ HOVER */
+    padding-left: 2rem;
+}
+
+/* Иконка стрелки появляется при hover */
+.submenu a::before {
+    content: '→';
+    margin-right: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: white;  /* БЕЛАЯ СТРЕЛКА */
+    font-weight: bold;
+}
+
+.submenu a:hover::before {
+    opacity: 1;
+    color: var(--color-danger);  /* КРАСНАЯ СТРЕЛКА ПРИ HOVER */
+}
+
+/* БЕЛОЕ ПОДМЕНЮ ДЛЯ НЕАКТИВНЫХ СТРАНИЦ */
+.nav-menu > li.has-submenu > a:not(.active) + .submenu {
+    background-color: white;  /* БЕЛЫЙ ФОН */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a {
+    color: var(--color-text-primary);  /* ТЁМНЫЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a:hover {
+    background-color: var(--color-surface);  /* СВЕТЛО-СЕРЫЙ ФОН ПРИ HOVER */
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a::before {
+    color: var(--color-danger);  /* КРАСНАЯ СТРЕЛКА */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a:hover::before {
+    opacity: 1;
+}
 
         @keyframes zoomIn {
             from {
@@ -1036,6 +1088,7 @@
 </body>
 
 </html>
+
 
 
 

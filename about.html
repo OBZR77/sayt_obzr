@@ -255,12 +255,13 @@
     z-index: 1;
 }
 
-        footer {
-            background-color: var(--color-primary);
-            color: white;
-            padding: 2rem 1rem;
-            margin-top: 4rem;
-        }
+      footer {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 2rem 1rem;
+    margin-top: 0;  /* Убираем верхний отступ */
+    width: 100%;    /* Растягиваем на всю ширину */
+}
 
         .footer-content {
             max-width: 1200px;
@@ -676,7 +677,8 @@ document.addEventListener('keydown', function(event) {
         "За профессионализм, добросовестный труд и умелую организацию образовательного процесса"</p>
         <a href="nagrady-podrobno.html" class="info-card-button">Грамоты →</a>
     </div>
-</section>    
+</section> 
+    </main>    
 
     <footer>
         <div class="footer-content">
@@ -993,6 +995,7 @@ document.addEventListener('keydown', function(event) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 

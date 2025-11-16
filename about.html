@@ -214,21 +214,32 @@
 }            
 
 /* Анимация появления подчёркивания снизу */
-.info-card-button::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background-color: var(--color-danger);
-    transition: width 0.4s ease;
+.info-card-button {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.875rem 2rem;
+    background: transparent;
+    color: var(--color-primary);
+    text-decoration: none;
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.info-card-button:hover::after {
-    width: 100%;
+.info-card-button:hover {
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 61, 122, 0.2);
 }
 
+.info-card-button:active {
+    transform: translateY(-1px) scale(0.98);
+}
 .info-card-button:hover {
     color: var(--color-danger);  /* Красный текст при наведении */
     border-color: var(--color-danger);  /* Красная рамка */
@@ -996,6 +1007,7 @@ document.addEventListener('keydown', function(event) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 

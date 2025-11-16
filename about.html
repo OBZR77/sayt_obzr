@@ -138,13 +138,14 @@
             padding-bottom: 1rem;
             border-bottom: 4px solid var(--color-danger);
         }
-
-        .profile-section {
+.profile-section {
     display: grid;
     grid-template-columns: 350px 1fr;
     gap: 3rem;
     margin-bottom: 3rem;
+    align-items: center;  /* Блок справа выровнен по центру */
 }
+       
         .profile-photo-container {
             text-align: center;
         }
@@ -170,7 +171,17 @@
             color: var(--color-text-secondary);
             margin-bottom: 1rem;
         }
+        .name-highlight {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);  /* Синий цвет */
+}
 
+.profile-name-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
         .info-card {
             background-color: var(--color-surface);
             padding: 2rem;
@@ -635,27 +646,25 @@ document.addEventListener('keydown', function(event) {
 
     <main>
         <h1 class="page-title">О себе</h1>
+<div class="profile-section">
+    <div class="profile-photo-container">
+        <img src="photo.jpg" alt="Дёмин Александр Юрьевич" class="profile-photo">
+    </div>
 
-        <div class="profile-section">
-            <div class="profile-photo-container">
-                <img src="photo.jpg" alt="Дёмин Александр Юрьевич" class="profile-photo">
-            </div>
-            </div>
-
-            <div>
-                <div class="info-card">
-                    <h2>📋 Основные сведения</h2>
-                    <ul> 
-                        <li><strong>ФИО:</strong> Дёмин Александр Юрьевич</li>
-                        <li><strong>Должность:</strong> Преподаватель-организатор ОБЗР</li>
-                        <li><strong>Педагогический стаж:</strong> 2 года</li>
-                        <li><strong>Квалификационная категория:</strong> Подготовка к аттестации на первую категорию</li>
-                        <li><strong>Преподаваемый предмет:</strong> ОБЗР, 8-11 классы</li>
-                    </ul>
-                </div>
-            </div>
+    <div>
+        <div class="info-card">
+            <h2>📋 Основные сведения</h2>
+            <ul> 
+                <li class="profile-name-item"><strong>ФИО:</strong> <span class="name-highlight">Дёмин Александр Юрьевич</span></li>
+                <li><strong>Должность:</strong> Преподаватель-организатор ОБЗР</li>
+                <li><strong>Педагогический стаж:</strong> 2 года</li>
+                <li><strong>Квалификационная категория:</strong> Подготовка к аттестации на первую категорию</li>
+                <li><strong>Преподаваемый предмет:</strong> ОБЗР, 8-11 классы</li>
+            </ul>
         </div>
-
+    </div>
+</div>
+        
         <div class="quote-section">
             <p class="quote-text">"Безопасность — это не просто знание правил, <br>
                 это образ жизни и ответственность за себя и окружающих"</p>
@@ -1006,6 +1015,7 @@ document.addEventListener('keydown', function(event) {
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 

@@ -1108,3 +1108,11 @@
         }
 
         // Закрытие по клавише
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

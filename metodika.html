@@ -269,7 +269,14 @@
             .mobile-menu-toggle {
                 display: block;
             }
-            
+            @media (max-width: 768px) {
+    /* Существующие стили... */
+    
+    /* Тезисы в 1 колонку на мобильных */
+    div[style*="grid-template-columns: repeat(2, 1fr)"] {
+        grid-template-columns: 1fr !important;
+    }
+}
             .nav-menu {
                 display: none;
                 flex-direction: column;
@@ -1169,3 +1176,4 @@
 
 
          
+

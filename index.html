@@ -682,14 +682,15 @@ section h2 {
             margin-bottom: 1.5rem;
             color: white;
             font-weight: 700;
+            display: flex;          ← УДАЛИТЬ
+            align-items: center;    ← УДАЛИТЬ
+            gap: 0.75rem;           ← УДАЛИТЬ
         }
 
         /* ЭМОДЗИ ПЕРЕД ЗАГОЛОВКОМ НОВОСТЕЙ */
        .news-summary h3::before {
     content: '📰';
     font-size: 3.5rem;
-    display: block;
-    margin-bottom: 1rem;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     text-align: left;  /* ← ДОБАВЬТЕ ЭТУ СТРОКУ */
         }

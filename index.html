@@ -703,7 +703,7 @@ section h2 {
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             gap: 1.5rem;
-            align-items: center;  
+            align-items: flex-start;
         }
 
         .news-summary-item:last-child {
@@ -818,30 +818,43 @@ section h2 {
         }
 
         /* Адаптивность */
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-                 -webkit-text-fill-color: initial;
-                  text-fill-color: initial;
-            }
-
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background-color: var(--color-primary);
-            }
-            .news-summary-icon {
-           font-size: 1.5rem;
-               }
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .nav-menu > li > a {
-                padding: 0.75rem 1rem;
-            }
-             .info-block-icon {
+    @media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        -webkit-text-fill-color: initial;
+        text-fill-color: initial;
+    }
+    
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--color-primary);
+    }
+    
+    .news-summary {
+        padding: 2rem;
+    }
+    
+    /* ИСПРАВЛЕНИЕ 1: Отступ заголовка от правого края */
+    .news-summary h3 {
+        font-size: 1.4rem;
+        padding-right: 1rem;    /* ← ДОБАВИЛИ */
+    }
+    
+    .news-summary-icon {
+        font-size: 1.5rem;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-menu > li > a {
+        padding: 0.75rem 1rem;
+    }
+    
+    .info-block-icon {
         -webkit-text-fill-color: initial !important;
         text-fill-color: initial !important;
         filter: none !important;

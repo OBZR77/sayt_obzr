@@ -999,6 +999,17 @@ section h2 {
             overflow: hidden;
             height: 100vh;
         }
+        @media (max-width: 480px) {
+  /* Специфично для карточки "Для родителей" */
+  .info-block.white .info-block-icon {
+    filter: none !important;
+    -webkit-filter: none !important;
+    -webkit-text-fill-color: initial !important;
+    text-fill-color: initial !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: auto !important; /* Отключает grayscale на macOS */
+  }
+}
     </style>
 </head>
 <body>

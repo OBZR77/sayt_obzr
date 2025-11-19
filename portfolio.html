@@ -28,7 +28,6 @@
             color: var(--color-text-primary);
             background-color: var(--color-background);
         }
-        
         /* ============================================
            HEADER (НЕ ТРОГАТЬ!)
            ============================================ */
@@ -108,13 +107,15 @@
             display: block;
             transition: background-color 0.3s ease;
         }
-        .nav-menu > li > a:hover {
+        
+       .nav-menu > li > a:hover {
     background-color: var(--color-primary-hover);
 }
 
 /* ИСКЛЮЧЕНИЕ: активная страница не меняет цвет при hover */
 .nav-menu > li > a.active {
     background-color: var(--color-danger);
+    border-radius: 8px 8px 0 0;
 }
 
 /* Убираем hover на активной странице */
@@ -127,11 +128,9 @@
 .nav-menu:has(a.active) > li > a:not(.active):hover {
     background-color: var(--color-primary-hover);
 }
-       
-              /* ============================================
-   ВЫПАДАЮЩИЕ ПОДМЕНЮ - НАЧАЛО
-   ============================================ */
-.nav-menu > li.has-submenu {
+        
+         /* ВЫПАДАЮЩИЕ ПОДМЕНЮ */
+     .nav-menu > li.has-submenu {
     position: relative;
 }
 
@@ -270,39 +269,80 @@
     opacity: 1;
 }
 
-/* ============================================
-   АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
-   ============================================ */
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
 
-@media (max-width: 768px) {
-    .submenu {
-        position: static;
-        box-shadow: none;
-        border-radius: 0;
-        border-top: none;
-        border-left: 3px solid var(--color-danger);
-        max-height: 0;
-        overflow: hidden;
-        padding: 0;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        transition: max-height 0.3s ease, padding 0.3s ease;
-    }
-
-    .nav-menu > li.has-submenu.open .submenu {
-        max-height: 500px;
-        padding: 0.5rem 0;
-    }
-
-    .submenu a {
-        padding-left: 2rem;
-    }
-
-    .submenu a:hover {
-        padding-left: 2.5rem;
-    }
-}
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu > li > a {
+                padding: 0.75rem 1rem;
+            }
+            
+            .submenu {
+                position: static;
+                box-shadow: none;
+                border-radius: 0;
+                border-top: none;
+                border-left: 3px solid var(--color-danger);
+                max-height: 0;
+                overflow: hidden;
+                padding: 0;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+            
+            .nav-menu > li.has-submenu.open .submenu {
+                max-height: 500px;
+                padding: 0.5rem 0;
+            }
+            
+            .nav-menu > li.has-submenu.open > a::after {
+                content: ' ↗';
+                font-size: 0.8rem;
+                margin-left: 0.3rem;
+                opacity: 0.7;
+            }
+            
+            .submenu a {
+                padding-left: 2rem;
+            }
+            
+            .submenu a:hover {
+                padding-left: 2.5rem;
+            }
+            
+            .header-title h1 {
+                font-size: 1.2rem;
+            }
+            
+            .header-subtitle {
+                font-size: 0.8rem;
+            }
+        }   
+     
       
         /* ============================================
            MAIN CONTENT (МОЖНО РЕДАКТИРОВАТЬ)

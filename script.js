@@ -296,22 +296,31 @@ if (qrFloatingButton && qrModalWindow) {
     }
     
     // Инициализация при загрузке страницы
-    window.addEventListener('load', function() {
-        loadButtonPosition();
-        showHintIfNeeded();
-        
-        // Плавное появление кнопки
-        setTimeout(function() {
-            qrFloatingButton.style.opacity = '0';
-            qrFloatingButton.style.transform = 'scale(0)';
-            
-            setTimeout(function() {
-                qrFloatingButton.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-                qrFloatingButton.style.opacity = '1';
-                qrFloatingButton.style.transform = 'scale(1)';
-            }, 100);
-        }, 500);
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    // СРАЗУ скрываем кнопку ДО загрузки позиции
+    if (qrFloatingButton) {
+        qrFloatingButton.style.opacity = '0';
+        qrFloatingButton.style.visibility = 'hidden';
+    }
+});
+
+window.addEventListener('load', function() {
+    // Загружаем сохранённую позицию
+    loadButtonPosition();
+    
+    // Показываем подсказку
+    showHintIfNeeded();
+    
+    // Плавное появление кнопки ПОСЛЕ установки позиции
+    setTimeout(function() {
+        if (qrFloatingButton) {
+            qrFloatingButton.style.visibility = 'visible';
+            qrFloatingButton.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            qrFloatingButton.style.opacity = '1';
+            qrFloatingButton.style.transform = 'scale(1)';
+        }
+    }, 100);
+});
     
     // Предотвращаем случайное перетаскивание при быстром клике
     qrFloatingButton.addEventListener('click', function(e) {
@@ -350,4 +359,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 console.log('✅ Скрипт сайта ОБЗР загружен успешно');
 
 console.log('📄 Текущая страница:', window.location.pathname.split('/').pop() || 'index.html');
+
 

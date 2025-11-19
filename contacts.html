@@ -128,6 +128,11 @@ nav {
     .nav-menu > li.has-submenu.open > a::after {
         transform: rotate(180deg);
     }
+      /* Подсветка открытого пункта */
+    .nav-menu > li.has-submenu.open > a {
+        background-color: var(--color-primary-active);
+    }
+            
     /* ИСКЛЮЧЕНИЕ: активная страница не меняет цвет при hover */
 .nav-menu > li > a.active {
     background-color: var(--color-danger);
@@ -831,6 +836,7 @@ function handleSubmenuClick(event, element) {
 </html>
 
    
+
 
 
 

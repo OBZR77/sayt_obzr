@@ -16,10 +16,42 @@
         .header-title h1 { font-size: 1.5rem; font-weight: 700; }
         .header-subtitle { font-size: 0.9rem; opacity: 0.9; }
         .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-        nav { background-color: var(--color-primary); }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-        .nav-menu { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .nav-menu a { color: white; text-decoration: none; padding: 1rem 1rem; display: block; transition: background-color 0.3s ease; border-radius: 4px 4px 0 0; }
+       /* Навигация */
+nav {
+    background-color: var(--color-primary);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 0;
+}
+
+.nav-menu > li {
+    position: relative;
+}
+
+.nav-menu > li > a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1rem;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.nav-menu > li > a:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.nav-menu > li > a.active {
+    background-color: var(--color-danger);
+}
         .nav-menu a:hover { background-color: var(--color-primary-hover); }
         .nav-menu a.active { background-color: var(--color-danger); }
         .nav-menu > li > a:hover {
@@ -58,7 +90,40 @@
         .footer-section ul { list-style: none; }
         .footer-section a { color: white; text-decoration: none; opacity: 0.9; }
         .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem; opacity: 0.8; }
-        @media (max-width: 768px) { .mobile-menu-toggle { display: block; } .nav-menu { display: none; flex-direction: column; } .nav-menu.active { display: flex; } .contacts-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { 
+        .mobile-menu-toggle { 
+        display: block; }
+        .nav-menu { 
+        display: none; 
+         flex-direction: column; 
+        width: 100%;
+        background-color: var(--color-primary);
+        } 
+        .nav-menu.active { 
+        display: flex;
+        }
+      .nav-menu > li > a {
+        padding: 0.75rem 1rem;
+    }
+    
+    /* Индикатор для пунктов с подменю */
+    .nav-menu > li.has-submenu > a::after {
+        content: ' ▼';
+        font-size: 0.7rem;
+        margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-menu > li.has-submenu.open > a::after {
+        transform: rotate(180deg);
+    }
+    
+    /* Подсветка открытого пункта */
+    .nav-menu > li.has-submenu.open > a {
+        background-color: var(--color-primary-active);
+    }
+}  
+       
         @media (max-width: 480px) { .header-photo { width: 50px; height: 50px; } .header-title h1 { font-size: 1.2rem; } }
     </style>
 </head>
@@ -723,4 +788,5 @@ function toggleMenu() {
 </html>
 
    
+
 

@@ -91,39 +91,42 @@
             cursor: pointer;
         }
 
-        nav {
-            background-color: var(--color-primary);
-        }
+      /* Навигация */
+nav {
+    background-color: var(--color-primary);
+}
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
 
-        .nav-menu {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 0;
+}
 
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            padding: 1rem 1rem;
-            display: block;
-            transition: background-color 0.3s ease;
-            border-radius: 4px 4px 0 0;
-        }
+.nav-menu > li {
+    position: relative;
+}
 
-        .nav-menu a:hover {
-            background-color: var(--color-primary-hover);
-        }
+.nav-menu > li > a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1rem;
+    display: block;
+    transition: background-color 0.3s ease;
+}
 
-        .nav-menu a.active {
-            background-color: var(--color-danger);
-        }
+.nav-menu > li > a:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.nav-menu > li > a.active {
+    background-color: var(--color-danger);
+}
 
         main {
             max-width: 1200px;
@@ -1076,6 +1079,7 @@ function toggleMenu() {
 </script>
 </body>
 </html>
+
 
 
 

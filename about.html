@@ -356,40 +356,76 @@
         /* ============================================
    ВЫПАДАЮЩИЕ ПОДМЕНЮ - НАЧАЛО
    ============================================ */
- /* Добавляем класс для пунктов меню с подменю */
 .nav-menu > li.has-submenu {
     position: relative;
 }
 
-/* Убираем стрелочки - оставляем только hover-эффект */
 .nav-menu > li.has-submenu > a:hover {
     background-color: var(--color-primary-hover);
 }
 
-/* Стили выпадающего подменю */
+/* Стили выпадающего подменю - БАЗОВОЕ КРАСНОЕ */
 .submenu {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: white;
+    background-color: white;  /* БЕЛЫЙ ФОН (для отступов) */
     min-width: 320px;
     max-width: 400px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     border-radius: 0 0 8px 8px;
     list-style: none;
-    padding: 0.75rem 0;
+    padding: 0.75rem 0;  /* БЕЛЫЕ ОТСТУПЫ СВЕРХУ/СНИЗУ */
     margin: 0;
     
-    /* Скрываем по умолчанию */
     opacity: 0;
     visibility: hidden;
     transform: translateY(-15px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
     transition-delay: 0s;
     
-    /* Граница сверху */
     border-top: 3px solid var(--color-danger);
     z-index: 1000;
+}
+
+/* КРАСНЫЙ ФОН ДЛЯ АКТИВНОЙ СТРАНИЦЫ - НА ПУНКТАХ МЕНЮ */
+.nav-menu > li.has-submenu > a.active + .submenu li {
+    background-color: #E53935;  /* КРАСНЫЙ ФОН НА <li> */
+}
+
+.nav-menu > li.has-submenu > a.active + .submenu a {
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a.active + .submenu a:hover {
+    background-color: white;  /* БЕЛЫЙ ФОН ПРИ HOVER */
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a.active + .submenu a::before {
+    color: white;  /* БЕЛАЯ СТРЕЛКА */
+}
+
+.nav-menu > li.has-submenu > a.active + .submenu a:hover::before {
+    color: var(--color-danger);  /* КРАСНАЯ СТРЕЛКА ПРИ HOVER */
+}
+
+/* БЕЛОЕ ПОДМЕНЮ ДЛЯ НЕАКТИВНЫХ СТРАНИЦ */
+.nav-menu > li.has-submenu > a:not(.active) + .submenu li {
+    background-color: white;  /* БЕЛЫЙ ФОН */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a {
+    color: var(--color-text-primary);  /* ТЁМНЫЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a:hover {
+    background-color: var(--color-surface);  /* СВЕТЛО-СЕРЫЙ ФОН */
+    color: var(--color-primary);
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a::before {
+    color: var(--color-danger);
 }
 
 /* Показываем при наведении с задержкой 350ms */
@@ -400,13 +436,13 @@
     transition-delay: 0.35s;
 }
 
-/* Стили пунктов подменю */
+/* Стили пунктов подменю - БЕЛЫЙ ТЕКСТ */
 .submenu li {
     margin: 0;
 }
 
 .submenu a {
-    color: var(--color-text-primary);
+    color: white;  /* БЕЛЫЙ ТЕКСТ */
     text-decoration: none;
     padding: 0.65rem 1.5rem;
     display: flex;
@@ -417,8 +453,8 @@
 }
 
 .submenu a:hover {
-    background-color: var(--color-surface);
-    color: var(--color-primary);
+    background-color: white;  /* БЕЛЫЙ ФОН ПРИ HOVER */
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ ПРИ HOVER */
     padding-left: 2rem;
 }
 
@@ -428,29 +464,35 @@
     margin-right: 0.75rem;
     opacity: 0;
     transition: opacity 0.2s ease;
-    color: var(--color-danger);
+    color: white;  /* БЕЛАЯ СТРЕЛКА */
     font-weight: bold;
 }
 
 .submenu a:hover::before {
     opacity: 1;
+    color: var(--color-danger);  /* КРАСНАЯ СТРЕЛКА ПРИ HOVER */
 }
 
-/* Разделитель в подменю (если нужен) */
-.submenu-divider {
-    height: 1px;
-    background-color: var(--color-border);
-    margin: 0.5rem 1rem;
+/* БЕЛОЕ ПОДМЕНЮ ДЛЯ НЕАКТИВНЫХ СТРАНИЦ */
+.nav-menu > li.has-submenu > a:not(.active) + .submenu {
+    background-color: white;  /* БЕЛЫЙ ФОН */
 }
 
-/* Заголовок группы в подменю (если нужен) */
-.submenu-header {
-    padding: 0.5rem 1.5rem 0.25rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a {
+    color: var(--color-text-primary);  /* ТЁМНЫЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a:hover {
+    background-color: var(--color-surface);  /* СВЕТЛО-СЕРЫЙ ФОН ПРИ HOVER */
+    color: var(--color-primary);  /* СИНИЙ ТЕКСТ */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a::before {
+    color: var(--color-danger);  /* КРАСНАЯ СТРЕЛКА */
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a:hover::before {
+    opacity: 1;
 }
 
 /* ============================================
@@ -458,47 +500,34 @@
    ============================================ */
 
 @media (max-width: 768px) {
-    /* На мобильных - клик вместо hover */
     .submenu {
         position: static;
         box-shadow: none;
-        background-color: var(--color-primary-hover);
+        border-radius: 0;
+        border-top: none;
+        border-left: 3px solid var(--color-danger);
         max-height: 0;
         overflow: hidden;
+        padding: 0;
         opacity: 1;
         visibility: visible;
         transform: none;
-        transition: max-height 0.4s ease;
-        border-top: none;
-        border-left: 3px solid var(--color-danger);
+        transition: max-height 0.3s ease, padding 0.3s ease;
     }
 
     .nav-menu > li.has-submenu.open .submenu {
-        max-height: 800px;
+        max-height: 500px;
+        padding: 0.5rem 0;
     }
 
     .submenu a {
-        color: white;
-        padding-left: 2.5rem;
-        font-size: 0.9rem;
+        padding-left: 2rem;
     }
 
     .submenu a:hover {
-        background-color: var(--color-primary-active);
-        color: white;
-        padding-left: 3rem;
-    }
-
-    .submenu a::before {
-        color: white;
-    }
-
-    .submenu-header {
-        color: rgba(255, 255, 255, 0.7);
         padding-left: 2.5rem;
     }
-} 
-
+}
     </style>
 </head>
 <body>
@@ -1013,8 +1042,24 @@ document.addEventListener('keydown', function(event) {
 </style>
     
 <script src="script.js"></script>
+  <script>
+function handleSubmenuClick(event, element) {
+    // На мобильных устройствах
+    if (window.innerWidth <= 768) {
+        const parentLi = element.parentElement;
+        if (parentLi.classList.contains('has-submenu')) {
+            event.preventDefault();
+            parentLi.classList.toggle('open');
+            return false;
+        }
+    }
+    // На десктопе - обычная навигация
+    return true;
+}
+</script>  
 </body>
 </html>
+
 
 
 

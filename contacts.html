@@ -127,7 +127,11 @@ nav {
     .nav-menu > li.has-submenu.open > a::after {
         transform: rotate(180deg);
     }
-    
+    /* ИСКЛЮЧЕНИЕ: активная страница не меняет цвет при hover */
+.nav-menu > li > a.active {
+    background-color: var(--color-danger);
+    border-radius: 8px 8px 0 0; /* закругление верхних углов */
+}
     /* Подсветка открытого пункта */
     .nav-menu > li.has-submenu.open > a {
         background-color: var(--color-primary-active);
@@ -798,6 +802,7 @@ function toggleMenu() {
 </html>
 
    
+
 
 
 

@@ -140,18 +140,18 @@ nav {
     background-color: var(--color-primary-hover);
 }
 
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 1rem;
-        }
+      main { 
+    max-width: 1200px; 
+    margin: 2rem auto;          /* БЫЛО: 0 auto → СТАЛО: 2rem auto */
+    padding: 0 1rem 2rem;       /* БЫЛО: 3rem 1rem → СТАЛО: 0 1rem 2rem */
+}
 
         .page-title {
             font-size: 2.5rem;
             color: var(--color-primary);
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 4px solid var(--color-danger);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--color-danger);
         }
 .profile-section {
     display: grid;
@@ -1091,6 +1091,7 @@ function toggleMenu() {
 </script>
 </body>
 </html>
+
 
 
 

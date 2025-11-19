@@ -128,7 +128,11 @@ const qrButtonHint = document.getElementById('qrButtonHint');
 
 // Если QR-кнопка существует на странице, инициализируем её функционал
 if (qrFloatingButton && qrModalWindow) {
-    
+     // СКРЫВАЕМ КНОПКУ СРАЗУ ПРИ ЗАГРУЗКЕ DOM
+    document.addEventListener('DOMContentLoaded', function() {
+        qrFloatingButton.style.opacity = '0';
+        qrFloatingButton.style.visibility = 'hidden';
+    });
     // Переменные для отслеживания перетаскивания
     let isDragging = false;
     let startX, startY;
@@ -296,14 +300,6 @@ if (qrFloatingButton && qrModalWindow) {
     }
     
     // Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', function() {
-    // СРАЗУ скрываем кнопку ДО загрузки позиции
-    if (qrFloatingButton) {
-        qrFloatingButton.style.opacity = '0';
-        qrFloatingButton.style.visibility = 'hidden';
-    }
-});
-
 window.addEventListener('load', function() {
     // Загружаем сохранённую позицию
     loadButtonPosition();
@@ -359,5 +355,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 console.log('✅ Скрипт сайта ОБЗР загружен успешно');
 
 console.log('📄 Текущая страница:', window.location.pathname.split('/').pop() || 'index.html');
+
 
 

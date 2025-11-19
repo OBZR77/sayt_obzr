@@ -109,10 +109,26 @@
             transition: background-color 0.3s ease;
         }
         
-        .nav-menu > li > a:hover,
-        .nav-menu > li > a.active {
-            background-color: var(--color-danger);
-        }
+.nav-menu > li > a:hover {
+    background-color: var(--color-primary-hover);
+}
+
+/* ИСКЛЮЧЕНИЕ: активная страница не меняет цвет при hover */
+.nav-menu > li > a.active {
+    background-color: var(--color-danger);
+}
+
+/* Убираем hover на активной странице */
+.nav-menu > li > a.active:hover {
+    background-color: var(--color-danger) !important;
+    cursor: default;
+}
+
+/* НЕ показываем красный на других кнопках, когда есть активная */
+.nav-menu:has(a.active) > li > a:not(.active):hover {
+    background-color: var(--color-primary-hover);
+}
+        
               /* ============================================
    ВЫПАДАЮЩИЕ ПОДМЕНЮ - НАЧАЛО
    ============================================ */
@@ -659,7 +675,7 @@
                     </li>
 
                     <li class="has-submenu">
-                        <a href="portfolio.html" onclick="return handleSubmenuClick(event, this)">Портфолио</a>
+                        <a href="portfolio.html" class="active" onclick="return handleSubmenuClick(event, this)">Портфолио</a>
                         <ul class="submenu">
                             <li><a href="rezultaty-obucheniya">Результаты освоения ОБЗР обучающимися</a></li>
                             <li><a href="dostizheniya-uchenikov">Достижения учащихся</a></li>
@@ -679,7 +695,7 @@
                     </li>
 
                     <li class="has-submenu">
-                        <a href="ai-projects.html" class="active" onclick="return handleSubmenuClick(event, this)">ИИ в образовании</a>
+                        <a href="ai-projects.html" onclick="return handleSubmenuClick(event, this)">ИИ в образовании</a>
                         <ul class="submenu">
                             <li><a href="ai-dlya-uchenikov">Для учеников - Творческие проекты</a></li>
                             <li><a href="ai-dlya-roditelej">Для родителей - практические материалы</a></li>

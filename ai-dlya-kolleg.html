@@ -421,6 +421,161 @@
         .info-block.light .info-block-button:hover {
             background-color: var(--color-danger);
         }
+/* ============================================
+   ГОРИЗОНТАЛЬНЫЕ КАРТОЧКИ (как на metodika.html)
+   ============================================ */
+
+.horizontal-card {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-active) 100%);
+    color: white;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 61, 122, 0.3);
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.horizontal-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 61, 122, 0.4);
+}
+
+.horizontal-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.horizontal-card-icon {
+    font-size: 3.5rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.horizontal-card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.horizontal-card-description {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1.5rem;
+}
+
+.horizontal-card-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.horizontal-card-features li {
+    padding-left: 1.8rem;
+    position: relative;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.95rem;
+}
+
+.horizontal-card-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-success);
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.horizontal-card-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background-color: white;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.horizontal-card-button:hover {
+    background-color: var(--color-danger);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(229, 57, 53, 0.4);
+}
+
+.horizontal-card-button::after {
+    content: '→';
+    transition: margin-left 0.3s ease;
+}
+
+.horizontal-card-button:hover::after {
+    margin-left: 0.5rem;
+}
+
+/* Вариант со светлым фоном */
+.horizontal-card.light {
+    background: white;
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.horizontal-card.light .horizontal-card-title {
+    color: var(--color-primary);
+}
+
+.horizontal-card.light .horizontal-card-description,
+.horizontal-card.light .horizontal-card-features li {
+    color: var(--color-text-primary);
+}
+
+.horizontal-card.light .horizontal-card-button {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.horizontal-card.light .horizontal-card-button:hover {
+    background-color: var(--color-danger);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .horizontal-card {
+        padding: 1.5rem;
+    }
+    
+    .horizontal-card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .horizontal-card-icon {
+        font-size: 3rem;
+    }
+    
+    .horizontal-card-title {
+        font-size: 1.4rem;
+    }
+    
+    .horizontal-card-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .horizontal-card-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
         
         footer {
             background-color: var(--color-primary);
@@ -788,20 +943,27 @@
                 </ul>
                 <a href="detalnaya-stranica-3.html" class="info-block-button">Подробнее</a>
             </div>
-
-            <div class="info-block light">
-                <span class="info-block-icon">✨</span>
-                <h3>Промпты для создания материалов</h3>
-                <p>Готовые промпты для коллег, которые хотят использовать ИИ в подготовке уроков.</p>
-                <ul>
-                    <li>Промпты для Claude, ChatGPT, YandexGPT</li>
-                    <li>Инструкции по работе с ИИ</li>
-                    <li>Экономия времени на подготовку</li>
-                </ul>
-                <a href="detalnaya-stranica-4.html" class="info-block-button">Подробнее</a>
-            </div>
-
         </div>
+<div class="horizontal-card light">
+    <div class="horizontal-card-header">
+        <span class="horizontal-card-icon">✨</span>
+        <h3 class="horizontal-card-title">Промпты для создания материалов</h3>
+    </div>
+    
+    <p class="horizontal-card-description">
+    Готовые промпты для коллег, которые хотят использовать ИИ в подготовке уроков.
+    </p>
+    
+    <ul class="horizontal-card-features">
+        <li>Промпты для Claude, ChatGPT, YandexGPT</li>
+        <li>Инструкции по работе с ИИ</li>
+        <li>Экономия времени на подготовку</li>
+        <li>Примеры успешных запросов</li>
+    </ul>
+    
+    <a href="detalnaya-stranica-3.html" class="horizontal-card-button">Подробнее</a>
+</div>
+        
     </main>
 
     <footer>

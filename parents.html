@@ -766,11 +766,16 @@
                             <li><a href="faq">Часто задаваемые вопросы (FAQ)</a></li>
                         </ul>
                     </li>
-
-                    <li>
-                        <a href="contacts.html">Контакты</a>
-                    </li>
-                </ul>
+ <li class="has-submenu">
+    <a href="contacts.html" class="active" onclick="return handleSubmenuClick(event, this)">Контакты</a>
+    <ul class="submenu">
+        <li><a href="contacts.html#feedback-form">Форма обратной связи</a></li>
+        <li><a href="contacts.html#about-school">О школе</a></li>
+        <li><a href="contacts.html#useful-links">Полезные ссылки</a></li>
+    </ul>
+</li>
+</ul>                
+                   
             </div>
         </nav>
     </header>
@@ -1076,9 +1081,9 @@ document.querySelectorAll('section ul li').forEach(card => {
             <div class="footer-section">
                 <h3>Разделы сайта</h3>
                 <ul>
-                    <li><a href="about.html">О себе</a></li>
-                    <li><a href="portfolio.html">Портфолио</a></li>
-                    <li><a href="metodika.html">Методическая копилка</a></li>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="ai-projects.html">ИИ в образовании</a></li>
+                    <li><a href="vneurochnaya.html">Активности</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
             </div>

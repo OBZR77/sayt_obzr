@@ -206,12 +206,18 @@ nav {
             border-left: 4px solid var(--color-primary);
             margin-bottom: 2rem;
         }
+.info-card h2 {
+    font-size: 1.75rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
 
-        .info-card h2 {
-            font-size: 1.75rem;
-            color: var(--color-primary);
-            margin-bottom: 1.5rem;
-        }
+/* МОБИЛЬНАЯ ВЕРСИЯ - увеличенный размер */
+@media (max-width: 768px) {
+    .info-card h2 {
+        font-size: 1.5rem;  /* Было 1.75rem */
+    }
+}
         
 /* Мобильная версия - заголовки карточек */
 @media (max-width: 768px) {
@@ -1134,6 +1140,7 @@ function toggleMenu() {
 </script>
 </body>
 </html>
+
 
 
 

@@ -364,35 +364,15 @@
     padding: 0 1rem 2rem;       /* БЫЛО: 3rem 1rem → СТАЛО: 0 1rem 2rem */
 }   
         section {
-        section {
-    margin-bottom: 4rem;
-}
-
-/* ИСКЛЮЧЕНИЕ: убираем отступ снизу у hero-секции */
-section.hero {
-    margin-bottom: 0 !important;
-}
-
+     margin-bottom: 4rem;
+        }
 section h2 {
-    font-size: 2.5rem;
+    font-size: 2.5rem;  /* УВЕЛИЧИЛИ с 2rem до 2.5rem */
     color: var(--color-primary);
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 4px solid var(--color-danger);
+    margin-bottom: 2rem;  /* УВЕЛИЧИЛИ с 1.5rem до 2rem */
+    padding-bottom: 1rem;  /* УВЕЛИЧИЛИ с 0.5rem до 1rem */
+    border-bottom: 4px solid var(--color-danger);  /* УВЕЛИЧИЛИ с 3px до 4px */
 }
-
-#o-predmete-obzr > h2 {
-    margin-bottom: 1.2rem;
-    margin-top: 0;  /* ДОБАВЛЕНО */
-}
-
-/* ===== ОБЁРТКА ДЛЯ СЕКЦИИ "О ПРЕДМЕТЕ ОБЗР" ===== */
-.obzr-info {
-    padding: 20px 0 80px 0;  /* УМЕНЬШЕНО: 20px сверху вместо 40px */
-    background: white;
-    margin-top: -30px;  /* ДОБАВЛЕНО: поднимаем секцию вверх */
-}
-
 /* ===== НОВЫЙ РАЗДЕЛ "О ПРЕДМЕТЕ ОБЗР" (ПО ДИЗАЙНУ СКРИНШОТА) ===== */
 .obzr-intro {
     color: var(--color-text-secondary);

@@ -238,6 +238,7 @@
         visibility: visible;
         transform: none;
         transition: max-height 0.3s ease, padding 0.3s ease;
+        background-color: white;
     }
     
     .nav-menu > li.has-submenu.open .submenu {
@@ -253,14 +254,18 @@
         opacity: 0.7;
     }
     
-    .submenu a {
+ .submenu a {
+        color: var(--color-text-primary);
+        background-color: white;
         padding-left: 2rem;
     }
     
     .submenu a:hover {
+        background-color: var(--color-surface);
+        color: var(--color-primary);
         padding-left: 2.5rem;
     }
-}
+}   
         
         main {
             max-width: 1200px;
@@ -1016,21 +1021,35 @@
                 closeLightbox();
             }
         });
-
-        function toggleMenu() {
+      function toggleMenu() {
             const menu = document.getElementById('navMenu');
             menu.classList.toggle('active');
         }
 
         function handleSubmenuClick(event, element) {
             if (window.innerWidth <= 768) {
+                const parentLi = element.parentElement;
+                const isOpen = parentLi.classList.contains('open');
+                
+                // Если подменю уже открыто - переходим по ссылке
+                if (isOpen) {
+                    return true; // Разрешаем переход по ссылке
+                }
+                
+                // Если подменю закрыто - открываем его
                 event.preventDefault();
-                const parentLi = element.closest('li.has-submenu');
-                parentLi.classList.toggle('open');
+                document.querySelectorAll('.has-submenu.open').forEach(item => {
+                    if (item !== parentLi) {
+                        item.classList.remove('open');
+                    }
+                });
+                parentLi.classList.add('open');
                 return false;
             }
             return true;
         }
+
+   
     </script>
 </body>
 </html>

@@ -1048,7 +1048,19 @@
             }
             return true;
         }
-
+// ============================================
+    // ВЫДЕЛЕНИЕ АКТИВНОЙ СТРАНИЦЫ В ПОДМЕНЮ
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const submenuLinks = document.querySelectorAll('.submenu a');
+        
+        submenuLinks.forEach(link => {
+            if (link.href === window.location.href) {
+                link.style.fontWeight = '700';
+                link.style.color = 'var(--color-primary)';
+            }
+        });
+    });
    
     </script>
 </body>

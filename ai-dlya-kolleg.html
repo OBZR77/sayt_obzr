@@ -109,10 +109,14 @@
             transition: background-color 0.3s ease;
         }
         
-        .nav-menu > li > a:hover,
-        .nav-menu > li > a.active {
-            background-color: var(--color-danger);
-        }
+       .nav-menu > li > a:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.nav-menu > li > a.active {
+    background-color: var(--color-danger);
+    border-radius: 8px 8px 0 0; /* закругление верхних углов */
+}
         
         /* ВЫПАДАЮЩЕЕ ПОДМЕНЮ */
         .nav-menu > li.has-submenu {
@@ -668,20 +672,26 @@
                     </li>
 
                     <li class="has-submenu">
-                        <a href="parents.html" onclick="return handleSubmenuClick(event, this)">Родителям</a>
+                        <a href="parents.html" class="active" onclick="return handleSubmenuClick(event, this)">Родителям</a>
                         <ul class="submenu">
-                            <li><a href="o-predmete">О предмете ОБЗР</a></li>
-                            <li><a href="uchebno-polevye-sbory">Учебно-полевые сборы</a></li>
-                            <li><a href="grafik-konsultacij">График консультаций</a></li>
+                            <li><a href="help-at-home">Как помочь ребёнку дома</a></li>
+                            <li><a href="training-camps">Готовимся к учебным сборам</a></li>
+                            <li><a href="safety-dialogue">Диалоги о безопасности</a></li>
+                            <li><a href="feedback">Обратная связь</a></li>
+                            <li><a href="grading">Как оценивается ОБЗР</a></li>
                             <li><a href="faq">Часто задаваемые вопросы (FAQ)</a></li>
-                            <li><a href="poleznye-resursy">Полезные ресурсы для родителей</a></li>
                         </ul>
                     </li>
-
-                    <li>
-                        <a href="contacts.html">Контакты</a>
-                    </li>
-                </ul>
+ <li class="has-submenu">
+    <a href="contacts.html" onclick="return handleSubmenuClick(event, this)">Контакты</a>
+    <ul class="submenu">
+        <li><a href="contacts.html#feedback-form">Форма обратной связи</a></li>
+        <li><a href="contacts.html#about-school">О школе</a></li>
+        <li><a href="contacts.html#useful-links">Полезные ссылки</a></li>
+    </ul>
+</li>
+</ul>             
+                   
             </div>
         </nav>
     </header>
@@ -829,9 +839,9 @@
             <div class="footer-section">
                 <h3>Разделы сайта</h3>
                 <ul>
-                    <li><a href="about.html">О себе</a></li>
-                    <li><a href="portfolio.html">Портфолио</a></li>
-                    <li><a href="metodika.html">Методическая копилка</a></li>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О себе"</a></li>
+                    <li><a href="ai-projects.html">ИИ в образовании</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
             </div>
@@ -1036,6 +1046,7 @@
 </body>
 
 </html>
+
 
 
 

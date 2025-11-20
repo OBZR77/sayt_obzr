@@ -172,7 +172,32 @@
             font-size: 0.95rem;
             line-height: 1.4;
         }
+/* АКТИВНЫЙ ПУНКТ ПОДМЕНЮ */
+.submenu a.active {
+    font-weight: 700;  /* Жирный шрифт */
+    background-color: rgba(255, 255, 255, 0.15);  /* Лёгкая подсветка */
+    padding-left: 2rem;  /* Отступ как при hover */
+}
 
+.submenu a.active::before {
+    content: '→';
+    margin-right: 0.75rem;
+    opacity: 1;  /* Стрелка всегда видна */
+    color: var(--color-danger);  /* Красная стрелка */
+    font-weight: bold;
+}
+
+/* Для белого подменю (неактивная страница в родительском меню) */
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a.active {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.nav-menu > li.has-submenu > a:not(.active) + .submenu a.active::before {
+    color: var(--color-danger);
+}
+        
         .submenu a:hover {
             background-color: var(--color-surface);
             color: var(--color-primary);
@@ -672,7 +697,7 @@
                     </li>
 
                     <li class="has-submenu">
-                        <a href="parents.html" class="active" onclick="return handleSubmenuClick(event, this)">Родителям</a>
+                        <a href="parents.html" onclick="return handleSubmenuClick(event, this)">Родителям</a>
                         <ul class="submenu">
                             <li><a href="help-at-home">Как помочь ребёнку дома</a></li>
                             <li><a href="training-camps">Готовимся к учебным сборам</a></li>
@@ -1046,6 +1071,7 @@
 </body>
 
 </html>
+
 
 
 

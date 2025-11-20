@@ -212,7 +212,24 @@ nav {
             color: var(--color-primary);
             margin-bottom: 1.5rem;
         }
-
+        
+/* Мобильная версия - заголовки карточек */
+@media (max-width: 768px) {
+    .info-card h2 {
+        font-size: 1.4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.3;
+    }
+    
+    .info-card h2::before {
+        content: attr(data-emoji);
+        display: block;
+        margin-bottom: 0.3rem;
+        font-size: 1.6rem;
+    }
+}
         .info-card ul {
             list-style: none;
             padding: 0;
@@ -705,7 +722,7 @@ document.addEventListener('keydown', function(event) {
 
     <div>
         <div class="info-card">
-            <h2>📋 Основные сведения</h2>
+         <h2 data-emoji="📋">Основные сведения</h2>  
             <ul> 
                 <li class="profile-name-item"><strong>ФИО:</strong> <span class="name-highlight">Дёмин Александр Юрьевич</span></li>
                 <li><strong>Должность:</strong> Преподаватель-организатор ОБЗР</li>
@@ -1117,6 +1134,7 @@ function toggleMenu() {
 </script>
 </body>
 </html>
+
 
 
 

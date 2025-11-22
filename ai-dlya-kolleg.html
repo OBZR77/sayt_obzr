@@ -222,24 +222,34 @@
 /* ============================================
    АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
    ============================================ */
-
-@media (max-width: 768px) {
     /* На мобильных - клик вместо hover */
+  @media (max-width: 768px) {
     .submenu {
         position: static;
         box-shadow: none;
         border-radius: 0;
         border-top: none;
-        border-left: none;
+        border-left: 3px solid var(--color-danger);
         max-height: 0;
         overflow: hidden;
         padding: 0;
+        margin: 0;
         opacity: 1;
         visibility: visible;
         transform: none;
         transition: max-height 0.3s ease, padding 0.3s ease;
-        background-color: white;
+        background-color: white !important;
     }
+    
+    .submenu li {
+        background-color: white !important;
+    }
+    
+    .nav-menu > li.has-submenu.open .submenu {
+        max-height: 500px;
+        padding: 0;
+    }
+} 
     
     .nav-menu > li.has-submenu.open .submenu {
         max-height: 500px;

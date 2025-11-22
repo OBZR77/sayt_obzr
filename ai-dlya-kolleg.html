@@ -222,8 +222,7 @@
 /* ============================================
    АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
    ============================================ */
-    /* На мобильных - клик вместо hover */
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .submenu {
         position: static;
         box-shadow: none;
@@ -247,35 +246,10 @@
     
     .nav-menu > li.has-submenu.open .submenu {
         max-height: 500px;
-        padding: 0 1rem 2rem; 
-    }
-}    
-    .info-block,
-    .horizontal-card {
-        margin-left: 0;
-        margin-right: 0;
-        border-radius: 12px;
-    }
-}
-        
-    .nav-menu > li.has-submenu.open .submenu {
-        max-height: 500px;
-        padding: 0;
-    }
-     /* БЕЛЫЙ ФОН ДЛЯ ПУНКТОВ СПИСКА */
-    .submenu li {
-        background-color: white;
+        padding: 0.5rem 0;
     }
     
-    /* Добавляем индикатор для открытого меню */
-    .nav-menu > li.has-submenu.open > a::after {
-        content: ' ↗';
-        font-size: 0.8rem;
-        margin-left: 0.3rem;
-        opacity: 0.7;
-    }
-    
- .submenu a {
+    .submenu a {
         color: var(--color-text-primary);
         background-color: white;
         padding-left: 2rem;
@@ -286,7 +260,7 @@
         color: var(--color-primary);
         padding-left: 2.5rem;
     }
-}   
+}
         
         main {
             max-width: 1200px;
